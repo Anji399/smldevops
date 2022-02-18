@@ -1,14 +1,12 @@
 package com.visualpathit.account.controller;
 
 import com.visualpathit.account.model.User;
-import com.visualpathit.account.service.ProducerService;
 import com.visualpathit.account.service.SecurityService;
 import com.visualpathit.account.service.UserService;
 import com.visualpathit.account.utils.MemcachedUtils;
 import com.visualpathit.account.validator.UserValidator;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,15 +28,13 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
     
-    @Autowired
-    private ProducerService producerService;
-    
     /** {@inheritDoc} */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public final String registration(final Model model) {
         model.addAttribute("userForm", new User());
-             	return "registration";
-      }
+
+        return "registration";
+    }
     /** {@inheritDoc} */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public final String registration(final @ModelAttribute("userForm") User userForm, 
@@ -58,8 +54,7 @@ public class UserController {
     /** {@inheritDoc} */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public final String login(final Model model, final String error, final String logout) {
-        System.out.println("Model data"+model.toString());
-    	if (error != null){
+        if (error != null){
             model.addAttribute("error", "Your username and password is invalid.");
         }
         if (logout != null){
@@ -95,9 +90,9 @@ public class UserController {
     	try{
     		if( id != null && MemcachedUtils.memcachedGetData(id)!= null){    			
     			User userData =  MemcachedUtils.memcachedGetData(id);
-    			Result ="Data is From Cache";
+    			Result ="Data is From Chache";
     			System.out.println("--------------------------------------------");
-    			System.out.println("Data is From Cache !!");
+    			System.out.println("Data is From Chache !!");
     			System.out.println("--------------------------------------------");
     			System.out.println("Father ::: "+userData.getFatherName());
     			model.addAttribute("user", userData);
@@ -155,19 +150,7 @@ public class UserController {
     	return "welcome";
     }
     
-    @RequestMapping(value={"/user/rabbit"}, method={RequestMethod.GET})
-    public String rabbitmqSetUp() { 
-    	System.out.println("Rabbit mq method is callled!!!");
-      for (int i = 0; i < 20; i++) {
-        producerService.produceMessage(generateString());
-      }
-      return "rabbitmq";
-    }
-    
-    private static String generateString() {
-      String uuid = UUID.randomUUID().toString();
-      return "uuid = " + uuid;
-    }
+
     
 
     

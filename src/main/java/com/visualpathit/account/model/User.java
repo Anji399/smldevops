@@ -50,7 +50,7 @@ public class User implements Serializable {
         return id;
     }
     /** {@inheritDoc}} !*/
-    public  void setId(final Long id) {
+    public final void setId(final Long id) {
         this.id = id;
     }
     /**{@inheritDoc}} !*/
@@ -58,7 +58,7 @@ public class User implements Serializable {
         return username;
     }
     /** {@inheritDoc}} !*/
-    public  void setUsername(final String username) {
+    public final void setUsername(final String username) {
         this.username = username;
     }
     /**
@@ -71,7 +71,7 @@ public class User implements Serializable {
     /**
      * {@inheritDoc}} 
      !*/
-    public  void setPassword(final String password) {
+    public final void setPassword(final String password) {
         this.password = password;
     }
     /**
@@ -82,7 +82,7 @@ public class User implements Serializable {
 		return userEmail;
 	}
     /** {@inheritDoc}} !*/
-	public  void setUserEmail(final String userEmail) {
+	public final void setUserEmail(final String userEmail) {
 		this.userEmail = userEmail;
 	}
 
@@ -95,7 +95,7 @@ public class User implements Serializable {
         return passwordConfirm;
     }
 	 /** {@inheritDoc}} !*/
-    public  void setPasswordConfirm(final String passwordConfirm) {
+    public final void setPasswordConfirm(final String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
     /** {@inheritDoc}} !*/
@@ -105,7 +105,7 @@ public class User implements Serializable {
         return roles;
     }
     /** {@inheritDoc}} !*/
-    public void setRoles(final Set<Role> roles) {
+    public final void setRoles(final Set<Role> roles) {
         this.roles = roles;
     }
 	public String getProfileImg() {
