@@ -1,28 +1,23 @@
 pipeline {
-
     agent any
-/*
-	tools {
-        maven "maven3"
-    }
-*/
+
     environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "172.31.40.209:8081"
-        NEXUS_REPOSITORY = "vprofile-release"
-        NEXUS_REPO_ID    = "vprofile-release"
-        NEXUS_CREDENTIAL_ID = "nexuslogin"
+        NEXUS_VERSION = "${env.NEXUS_VERSION}"
+        NEXUS_PROTOCOL = "${env.NEXUS_PROTOCOL}"
+        NEXUS_URL = "${env.NEXUS_URL}"
+        NEXUS_REPOSITORY = "${env.NEXUS_REPOSITORY}"
+        NEXUS_CREDENTIAL_ID = "${env.NEXUS_CREDENTIAL_ID}"
         ARTVERSION = "${env.BUILD_ID}"
+        NEXUS_REPOGRP_ID  = "${env.NEXUS_REPOGRP_ID}"
     }
 
     stages{
-
         stage('Fetch Code') {
             steps {
                 git branch: 'paac', url: 'https://github.com/devopshydclub/vprofile-project.git'
             }
         }
+
         stage('BUILD'){
             steps {
                 sh 'mvn clean install -DskipTests'
@@ -59,11 +54,9 @@ pipeline {
         }
 
         stage('CODE ANALYSIS with SONARQUBE') {
-
             environment {
-                scannerHome = tool 'mysonarscanner4'
+             scannerHome = tool 'sonar4'
             }
-
             steps {
                 withSonarQubeEnv('sonar-pro') {
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
@@ -96,7 +89,7 @@ pipeline {
                                 nexusVersion: NEXUS_VERSION,
                                 protocol: NEXUS_PROTOCOL,
                                 nexusUrl: NEXUS_URL,
-                                groupId: pom.groupId,
+                                groupId: NEXUS_REPOGRP_ID,
                                 version: ARTVERSION,
                                 repository: NEXUS_REPOSITORY,
                                 credentialsId: NEXUS_CREDENTIAL_ID,
@@ -121,7 +114,4 @@ pipeline {
 
 
     }
-
-
 }
-
