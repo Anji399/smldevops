@@ -141,6 +141,9 @@
                      <c:if test="${pageContext.request.userPrincipal.name =='admin_vp'}">
 					     <a href="${contextPath}/users" class="btn btn-success" >All Users</a>
 					 </c:if>
+					  <c:if test="${pageContext.request.userPrincipal.name =='admin_vp'}">
+					     <a href="${contextPath}/user/rabbit" class="btn btn-success" >RabbitMq</a>
+					 </c:if>
                     <br><br><hr>
                     <span class="pull-left">
                         <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Posts</a>
