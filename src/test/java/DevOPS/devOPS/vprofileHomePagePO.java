@@ -1,21 +1,13 @@
 package DevOPS.devOPS;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.Time;
-//import java.io.File;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.io.FileUtils;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-//import com.sun.jna.platform.FileUtils;
-
-public class vprofileHomePagePO extends Variables {
+public class vprofileHomePagePO {
 
 	//Acquiring Web Driver From the test suite and creating a local instance
 	
@@ -57,34 +49,23 @@ public class vprofileHomePagePO extends Variables {
 		   
 		}
 		
-	    public void scrnShot() throws IOException {
-	    	
-	    	//Convert web driver object to TakeScreenshot
+		//Method for invoking login Activity
 
-	        TakesScreenshot scrShot =((TakesScreenshot)driver);
-
-	        //Call getScreenshotAs method to create image file
-
-	                File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-
-	            //Move image file to new destination
-
-	                File DestFile=new File(Variables.ScreenShotPath+System.currentTimeMillis()+".png" );
-
-	                //Copy file at destination
-
-	                FileUtils.copyFile(SrcFile, DestFile);
-	    	
-	    }
-	    
+	/*	public void loginAction(String UserName, String Password) throws InterruptedException {		 
+					
+			userName.sendKeys(UserName);
+			password.sendKeys(Password);
+			Thread.sleep(5000);
+			signin.click();
+		}*/
 		
-		public vprofileHomePageVerification loginAction(String UserName, String Password) throws InterruptedException, IOException {		 
+		public vprofileHomePageVerification loginAction(String UserName, String Password) throws InterruptedException {		 
 			
 			userName.sendKeys(UserName);
 			password.sendKeys(Password);
 			Thread.sleep(5000);
 			signin.click();
-			scrnShot();
+			
 			return new vprofileHomePageVerification(driver);
 		}
 }

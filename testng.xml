@@ -6,10 +6,10 @@
 			<class name="SeleniumSmoke.Selenium.login"/>
 			</classes>
 	</test> -->
-	<test name="PrincipleTestSuite">
+	<!-- <test name="PrincipleTestSuite">
 		<classes>
-			<class name="DevOPS.devOPS.VProfile_TestSuite"/>
+			<class name="SeleniumSmoke.Selenium.PrincipleTestSuite"/>
 			</classes>
-	</test>
+	</test> -->
 		
 </suite>
